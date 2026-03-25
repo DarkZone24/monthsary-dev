@@ -262,7 +262,7 @@
 
   .photo-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 12px;
   }
 
@@ -277,28 +277,32 @@
     background: linear-gradient(140deg, rgba(232,160,168,0.08), rgba(201,169,110,0.06));
   }
 
-  .photo-card:nth-child(1) { animation-delay: 1.5s; }
-  .photo-card:nth-child(2) { animation-delay: 1.7s; }
-  .photo-card:nth-child(3) { animation-delay: 1.9s; }
-  .photo-card:nth-child(4) { animation-delay: 2.1s; grid-column: span 2; aspect-ratio: 16/9; }
-  .photo-card:nth-child(5) { animation-delay: 2.3s; }
-  .photo-card:nth-child(6) { animation-delay: 2.5s; grid-column: span 3; aspect-ratio: 21/9; }
+  .photo-card.is-hidden {
+    display: none;
+  }
+
+  .photo-card:nth-child(1) { animation-delay: 1.2s; }
+  .photo-card:nth-child(2) { animation-delay: 1.3s; }
+  .photo-card:nth-child(3) { animation-delay: 1.4s; }
+  .photo-card:nth-child(4) { animation-delay: 1.5s; }
+  .photo-card:nth-child(5) { animation-delay: 1.6s; }
+  .photo-card:nth-child(6) { animation-delay: 1.7s; }
 
   .photo-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center;
     display: block;
     transition: transform 0.6s ease;
     filter: sepia(8%) saturate(90%);
     will-change: transform;
   }
 
-  /* Fine-tune focal points for specific photos */
-  .photo-card:nth-child(4) img { object-position: center 30%; }
-  .photo-card:nth-child(5) img { object-position: center 40%; }
-  .photo-card:nth-child(6) img { object-position: center 60%; }
+  /* Center-crop the 25th image */
+  .photo-grid .photo-card:nth-child(25) img {
+    object-position: center center;
+  }
 
   .photo-card:hover img {
     transform: scale(1.06);
@@ -318,6 +322,7 @@
   .photo-card:hover::after {
     border-color: rgba(201,169,110,0.6);
   }
+
 
   .message-section {
     position: relative;
@@ -399,6 +404,33 @@
     cursor: pointer;
     perspective: 1200px;
     transition: transform 0.35s ease;
+  }
+
+  .qr-section {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qr-caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.6);
+  }
+
+  .qr-img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    border-radius: 12px;
+    background: #fff;
+    padding: 8px;
+    border: 1px solid rgba(201,169,110,0.45);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
   }
 
   .envelope:hover {
@@ -614,11 +646,9 @@
 
   @media (max-width: 600px) {
     .photo-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 7px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
     }
-    .photo-card:nth-child(4) { grid-column: span 2; aspect-ratio: 4/3; }
-    .photo-card:nth-child(6) { grid-column: span 2; aspect-ratio: 4/3; }
     .hero-inner { padding: 22px; }
     .hero-sub { letter-spacing: 3px; }
     .section-title { letter-spacing: 3px; }
@@ -652,22 +682,29 @@
     <div class="hero-meta">April 1, 2026 &nbsp;&middot;&nbsp; Our First Chapter</div>
     <div class="cta-row">
       <a class="cta" href="#letter">Open The Letter</a>
-      <a class="cta" href="#gallery">See Our Moments</a>
+      <a class="cta" href="#gallery-section">See Our Moments</a>
+      <a class="cta" href="#qrcode">Scan Me</a>
     </div>
     <div class="scroll-indicator">Scroll down to see more</div>
   </div>
 </section>
 
-<section class="gallery-section" id="gallery">
+<section class="gallery-section" id="gallery-section">
   <p class="section-title">Our Moments</p>
   <div class="gallery-wrap">
     <div class="photo-grid">
-      <div class="photo-card"><img src="images/2.jpg" alt="You"></div>
-      <div class="photo-card"><img src="images/1.jpg" alt="You"></div>
-      <div class="photo-card"><img src="images/3.jpg" alt="You"></div>
-      <div class="photo-card"><img src="images/4.jpg" alt="Us"></div>
-      <div class="photo-card"><img src="images/5.jpg" alt="You"></div>
-      <div class="photo-card"><img src="images/6.jpg" alt="You"></div>
+      <div class="photo-card"><img src="images/1.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/2.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/3.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/4.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/5.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/6.jpg" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att._3jkAbjdjm715MHWj1ZS1HVWqAWE_1IKT8ZkPyeGW6w.JPG" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att._Igmoh0528DxKumDBuBZXblffkOX6bopTHfN2ai_5V4.JPG" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att.0bLRyoNJnhkV0A9r9y0SMycmQDsWX9F3XR-71dp2mNw.JPG" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att.1qCodw_qlt23iQxqrYwyPde3Ljemo6NpeFjbdUEMZDM.JPG" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att.4J_OgdpoEQ6QwNfs5W3iZUykf4cPvB0uh349tCmWMZE.JPG" alt="Moment" loading="lazy"></div>
+      <div class="photo-card"><img src="images/att.4RjQqK0nwJBHzYyyyktiTWqhd421iRleMtFMDEp3cuU.JPG" alt="Moment" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -694,6 +731,17 @@ Happy 1st monthsary, my love. Here&#39;s to many more months and years together 
       </div>
     </div>
   </div>
+  <div class="qr-section" id="qrcode" aria-label="QR code">
+    <img
+      class="qr-img"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&color=171-131-82&bgcolor=255-255-255&data=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1-ER6ZB3WOgxSMNvsjPlS57-fXXRXcttY%3Fusp%3Dsharing"
+      alt="QR code for shared folder"
+      loading="eager"
+      referrerpolicy="no-referrer"
+      onerror="this.style.display='none';this.nextElementSibling.textContent='Open the link below';"
+    >
+    <div class="qr-caption">Scan To View</div>
+  </div>
 </section>
 </main>
 
@@ -701,6 +749,9 @@ Happy 1st monthsary, my love. Here&#39;s to many more months and years together 
   <div class="footer-hearts">&hearts; &hearts; &hearts;</div>
   <p class="footer-date">April 1, 2026 &nbsp;&middot;&nbsp; Forever &amp; always</p>
 </footer>
+
+</div>
+</div>
 
 <script>
   (function () {
@@ -757,6 +808,5 @@ Happy 1st monthsary, my love. Here&#39;s to many more months and years together 
     });
   })();
 </script>
-
 </body>
 </html>
