@@ -19,6 +19,8 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: radial-gradient(1200px 800px at 20% -10%, rgba(192,97,106,0.25), transparent 60%),
                 radial-gradient(900px 600px at 80% 10%, rgba(201,169,110,0.18), transparent 55%),
@@ -27,6 +29,18 @@
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
     position: relative;
+    line-height: 1.6;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:focus-visible,
+  .envelope:focus-visible {
+    outline: 2px solid rgba(201,169,110,0.7);
+    outline-offset: 4px;
   }
 
   body::before,
@@ -89,6 +103,11 @@
     100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
   }
 
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
   .hero {
     position: relative;
     min-height: 100vh;
@@ -99,6 +118,18 @@
     text-align: center;
     padding: 60px 20px;
     z-index: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    padding: clamp(28px, 5vw, 46px);
+    border-radius: 18px;
+    border: 1px solid rgba(201,169,110,0.2);
+    background: rgba(18,7,10,0.5);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   .hero::before {
@@ -141,12 +172,53 @@
     animation: fadeUp 1s ease forwards 1s;
   }
 
+  .hero-meta {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.55);
+  }
+
   .heart-divider {
     font-size: 1.5rem;
     margin: 30px 0;
     opacity: 0;
     animation: fadeUp 1s ease forwards 1.3s;
     color: var(--rose);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(201,169,110,0.5);
+    background: linear-gradient(140deg, rgba(232,160,168,0.2), rgba(201,169,110,0.15));
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    border-color: rgba(201,169,110,0.8);
+  }
+
+  .scroll-indicator {
+    margin-top: 32px;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.45);
+    animation: float 2.4s ease-in-out infinite;
   }
 
   .section-title {
@@ -174,6 +246,16 @@
     padding: clamp(18px, 3vw, 28px);
     box-shadow: 0 30px 80px rgba(0,0,0,0.35);
     backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(500px 280px at 20% 0%, rgba(201,169,110,0.15), transparent 60%);
+    pointer-events: none;
   }
 
   .photo-grid {
@@ -188,7 +270,7 @@
     border-radius: 8px;
     aspect-ratio: 3/4;
     opacity: 1;
-    animation: fadeUp 0.8s ease forwards;
+    animation: photoReveal 0.9s ease forwards;
     box-shadow: 0 16px 40px rgba(0,0,0,0.35);
     background: linear-gradient(140deg, rgba(232,160,168,0.08), rgba(201,169,110,0.06));
   }
@@ -208,6 +290,7 @@
     display: block;
     transition: transform 0.6s ease;
     filter: sepia(8%) saturate(90%);
+    will-change: transform;
   }
 
   /* Fine-tune focal points for specific photos */
@@ -238,9 +321,10 @@
     position: relative;
     z-index: 1;
     padding: 140px 20px 60px;
-    max-width: 700px;
+    max-width: 860px;
     margin: 0 auto;
     text-align: center;
+    scroll-margin-top: 80px;
   }
 
   .envelope-wrap {
@@ -264,7 +348,7 @@
 
   .message-box::before,
   .message-box::after {
-    content: '✦';
+    content: "\2726";
     color: var(--gold);
     font-size: 0.7rem;
     position: absolute;
@@ -280,6 +364,8 @@
     color: var(--cream);
     font-weight: 300;
     font-style: italic;
+    text-align: left;
+    letter-spacing: 0.2px;
   }
 
   .iloveyou {
@@ -292,6 +378,17 @@
     text-shadow: 0 0 30px rgba(192,97,106,0.5);
   }
 
+  .letter-signature {
+    display: block;
+    margin-top: 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.7);
+    font-style: normal;
+  }
+
   .envelope {
     position: relative;
     width: min(720px, 92vw);
@@ -299,6 +396,11 @@
     margin: 0 auto;
     cursor: pointer;
     perspective: 1200px;
+    transition: transform 0.35s ease;
+  }
+
+  .envelope:hover {
+    transform: translateY(-4px);
   }
 
   .envelope-shell {
@@ -368,13 +470,24 @@
     bottom: 0;
     transform: translateX(-50%) translateY(0%);
     width: min(760px, 95vw);
-    background: rgba(18,7,10,0.8);
+    background: linear-gradient(160deg, rgba(24,10,13,0.92), rgba(12,6,8,0.95));
     border: 1px solid rgba(201,169,110,0.28);
     border-radius: 12px;
     box-shadow: 0 30px 90px rgba(0,0,0,0.45);
     opacity: 0;
     transition: transform 0.9s ease, opacity 0.6s ease;
     pointer-events: none;
+    max-height: min(70vh, 520px);
+    overflow: auto;
+  }
+
+  .letter::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .letter::-webkit-scrollbar-thumb {
+    background: rgba(201,169,110,0.4);
+    border-radius: 999px;
   }
 
   .envelope.is-open .envelope-flap {
@@ -478,9 +591,23 @@
     60% { transform: rotate(-45deg) scale(1.12); }
   }
 
+  @keyframes photoReveal {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .petals { display: none; }
   }
 
   @media (max-width: 600px) {
@@ -490,6 +617,12 @@
     }
     .photo-card:nth-child(4) { grid-column: span 2; aspect-ratio: 4/3; }
     .photo-card:nth-child(6) { grid-column: span 2; aspect-ratio: 4/3; }
+    .hero-inner { padding: 22px; }
+    .hero-sub { letter-spacing: 3px; }
+    .section-title { letter-spacing: 3px; }
+    .envelope-wrap { height: min(560px, 95vw); }
+    .letter { max-height: 65vh; }
+    .envelope-hint { font-size: 0.65rem; letter-spacing: 2px; }
   }
 </style>
 </head>
@@ -507,11 +640,17 @@
   <div class="petal"></div><div class="petal"></div><div class="petal"></div>
 </div>
 
+<main>
 <section class="hero">
-  <p class="badge">for my one &amp; only</p>
-  <h1 class="hero-title">Happy 1st Monthsary</h1>
-  <p class="hero-sub">One month of love &nbsp;&middot;&nbsp; One lifetime to go</p>
-  <div class="heart-divider">&hearts; &nbsp; &hearts; &nbsp; &hearts;</div>
+  <div class="hero-inner">
+    <p class="badge">for my one &amp; only</p>
+    <h1 class="hero-title">Happy 1st Monthsary</h1>
+    <p class="hero-sub">One month of love &nbsp;&middot;&nbsp; One lifetime to go</p>
+    <div class="heart-divider">&hearts; &nbsp; &hearts; &nbsp; &hearts;</div>
+    <div class="hero-meta">April 1, 2026 &nbsp;&middot;&nbsp; Our First Chapter</div>
+    <a class="cta" href="#letter">Open The Letter</a>
+    <div class="scroll-indicator">Scroll</div>
+  </div>
 </section>
 
 <section class="gallery-section">
@@ -528,7 +667,7 @@
   </div>
 </section>
 
-<section class="message-section">
+<section class="message-section" id="letter">
   <div class="envelope-wrap">
   <div class="envelope is-close" id="love-envelope" role="button" aria-expanded="false" tabindex="0">
       <div class="envelope-shell"></div>
@@ -546,11 +685,13 @@ I never expected that I would find someone like you&#8212;someone who understand
 This first month is just a small chapter of our story, but it&#39;s already filled with memories I&#39;ll always treasure. And if this is how wonderful one month feels, I can&#39;t wait to see what the future holds for us.<br><br>
 Thank you for being you&#8212;for your love, your patience, and your presence in my life. I promise to continue choosing you, caring for you, and growing with you every single day.<br><br>
 Happy 1st monthsary, my love. Here&#39;s to many more months and years together &#x1F496;<br><br>
-<span class="iloveyou">I Love You</span></p>
+<span class="letter-signature">Forever yours,<br>Love</span>
+<span class="iloveyou">I love you</span></p>
       </div>
     </div>
   </div>
 </section>
+</main>
 
 <footer class="footer">
   <div class="footer-hearts">&hearts; &hearts; &hearts;</div>
@@ -603,6 +744,11 @@ Happy 1st monthsary, my love. Here&#39;s to many more months and years together 
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         toggle();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        setOpen(false);
       }
     });
   })();
