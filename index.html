@@ -122,13 +122,8 @@
 
   .hero-inner {
     position: relative;
-    padding: clamp(28px, 5vw, 46px);
-    border-radius: 18px;
-    border: 1px solid rgba(201,169,110,0.2);
-    background: rgba(18,7,10,0.5);
-    box-shadow: 0 30px 90px rgba(0,0,0,0.4);
-    backdrop-filter: blur(10px);
-    max-width: 720px;
+    padding: clamp(10px, 3vw, 24px);
+    max-width: 900px;
     margin: 0 auto;
   }
 
@@ -186,6 +181,13 @@
     opacity: 0;
     animation: fadeUp 1s ease forwards 1.3s;
     color: var(--rose);
+  }
+
+  .cta-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
   }
 
   .cta {
@@ -648,12 +650,15 @@
     <p class="hero-sub">One month of love &nbsp;&middot;&nbsp; One lifetime to go</p>
     <div class="heart-divider">&hearts; &nbsp; &hearts; &nbsp; &hearts;</div>
     <div class="hero-meta">April 1, 2026 &nbsp;&middot;&nbsp; Our First Chapter</div>
-    <a class="cta" href="#letter">Open The Letter</a>
-    <div class="scroll-indicator">Scroll</div>
+    <div class="cta-row">
+      <a class="cta" href="#letter">Open The Letter</a>
+      <a class="cta" href="#gallery">See Our Moments</a>
+    </div>
+    <div class="scroll-indicator">Scroll down to see more</div>
   </div>
 </section>
 
-<section class="gallery-section">
+<section class="gallery-section" id="gallery">
   <p class="section-title">Our Moments</p>
   <div class="gallery-wrap">
     <div class="photo-grid">
@@ -685,7 +690,6 @@ I never expected that I would find someone like you&#8212;someone who understand
 This first month is just a small chapter of our story, but it&#39;s already filled with memories I&#39;ll always treasure. And if this is how wonderful one month feels, I can&#39;t wait to see what the future holds for us.<br><br>
 Thank you for being you&#8212;for your love, your patience, and your presence in my life. I promise to continue choosing you, caring for you, and growing with you every single day.<br><br>
 Happy 1st monthsary, my love. Here&#39;s to many more months and years together &#x1F496;<br><br>
-<span class="letter-signature">Forever yours,<br>Love</span>
 <span class="iloveyou">I love you</span></p>
       </div>
     </div>
