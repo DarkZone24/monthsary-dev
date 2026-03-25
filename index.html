@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 1st Monthsary &hearts;</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c0616a;
+    --blush: #f2d0d4;
+    --deep: #1a0a0d;
+    --cream: #fdf4f5;
+    --gold: #c9a96e;
+    --petal: #e8a0a8;
+    --velvet: #2b0f16;
+    --shadow: rgba(12, 5, 7, 0.65);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: radial-gradient(1200px 800px at 20% -10%, rgba(192,97,106,0.25), transparent 60%),
+                radial-gradient(900px 600px at 80% 10%, rgba(201,169,110,0.18), transparent 55%),
+                linear-gradient(160deg, #14070a 0%, #1b0b10 35%, #12070a 100%);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:focus-visible,
+  .envelope:focus-visible {
+    outline: 2px solid rgba(201,169,110,0.7);
+    outline-offset: 4px;
+  }
+
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -10%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    background: radial-gradient(400px 400px at 15% 25%, rgba(232,160,168,0.18), transparent 60%),
+                radial-gradient(500px 500px at 85% 75%, rgba(201,169,110,0.12), transparent 65%);
+    filter: blur(10px);
+  }
+
+  body::after {
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 120px 120px;
+    opacity: 0.15;
+  }
+
+  .petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    width: 8px; height: 10px;
+    background: var(--petal);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+
+  .petal:nth-child(1)  { left: 5%;  width:6px;  height:8px;  animation-duration:8s;  animation-delay:0s;   background:#e8a0a8; }
+  .petal:nth-child(2)  { left: 15%; width:9px;  height:11px; animation-duration:10s; animation-delay:1.5s; background:#f2b8be; }
+  .petal:nth-child(3)  { left: 25%; width:7px;  height:9px;  animation-duration:9s;  animation-delay:3s;   background:#d4898f; }
+  .petal:nth-child(4)  { left: 40%; width:5px;  height:7px;  animation-duration:11s; animation-delay:0.5s; background:#e8a0a8; }
+  .petal:nth-child(5)  { left: 55%; width:8px;  height:10px; animation-duration:7s;  animation-delay:2s;   background:#f2b8be; }
+  .petal:nth-child(6)  { left: 65%; width:6px;  height:8px;  animation-duration:12s; animation-delay:4s;   background:#c0616a; opacity:0.4; }
+  .petal:nth-child(7)  { left: 75%; width:10px; height:12px; animation-duration:9s;  animation-delay:1s;   background:#e8a0a8; }
+  .petal:nth-child(8)  { left: 85%; width:7px;  height:9px;  animation-duration:8s;  animation-delay:3.5s; background:#f2b8be; }
+  .petal:nth-child(9)  { left: 92%; width:5px;  height:7px;  animation-duration:10s; animation-delay:0.8s; background:#d4898f; }
+  .petal:nth-child(10) { left: 35%; width:8px;  height:10px; animation-duration:13s; animation-delay:2.5s; background:#e8a0a8; }
+  .petal:nth-child(11) { left: 48%; width:6px;  height:8px;  animation-duration:7s;  animation-delay:5s;   background:#f2b8be; }
+  .petal:nth-child(12) { left: 70%; width:9px;  height:11px; animation-duration:11s; animation-delay:1.2s; background:#c9a96e; opacity:0.3; }
+
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg);   opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    z-index: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    padding: clamp(28px, 5vw, 46px);
+    border-radius: 18px;
+    border: 1px solid rgba(201,169,110,0.2);
+    background: rgba(18,7,10,0.5);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(192,97,106,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .hero-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    color: var(--blush);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 0.6s;
+    text-shadow: 0 0 60px rgba(192,97,106,0.4);
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+    color: var(--petal);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1s;
+  }
+
+  .hero-meta {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.55);
+  }
+
+  .heart-divider {
+    font-size: 1.5rem;
+    margin: 30px 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.3s;
+    color: var(--rose);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(201,169,110,0.5);
+    background: linear-gradient(140deg, rgba(232,160,168,0.2), rgba(201,169,110,0.15));
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    border-color: rgba(201,169,110,0.8);
+  }
+
+  .scroll-indicator {
+    margin-top: 32px;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.45);
+    animation: float 2.4s ease-in-out infinite;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.7);
+    text-align: center;
+    margin: 0 0 18px;
+  }
+
+  .gallery-section {
+    position: relative;
+    z-index: 1;
+    padding: 10px 16px 70px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .gallery-wrap {
+    background: rgba(18,7,10,0.6);
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 10px;
+    padding: clamp(18px, 3vw, 28px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(500px 280px at 20% 0%, rgba(201,169,110,0.15), transparent 60%);
+    pointer-events: none;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 3/4;
+    opacity: 1;
+    animation: photoReveal 0.9s ease forwards;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    background: linear-gradient(140deg, rgba(232,160,168,0.08), rgba(201,169,110,0.06));
+  }
+
+  .photo-card:nth-child(1) { animation-delay: 1.5s; }
+  .photo-card:nth-child(2) { animation-delay: 1.7s; }
+  .photo-card:nth-child(3) { animation-delay: 1.9s; }
+  .photo-card:nth-child(4) { animation-delay: 2.1s; grid-column: span 2; aspect-ratio: 16/9; }
+  .photo-card:nth-child(5) { animation-delay: 2.3s; }
+  .photo-card:nth-child(6) { animation-delay: 2.5s; grid-column: span 3; aspect-ratio: 21/9; }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: sepia(8%) saturate(90%);
+    will-change: transform;
+  }
+
+  /* Fine-tune focal points for specific photos */
+  .photo-card:nth-child(4) img { object-position: center 30%; }
+  .photo-card:nth-child(5) img { object-position: center 40%; }
+  .photo-card:nth-child(6) img { object-position: center 60%; }
+
+  .photo-card:hover img {
+    transform: scale(1.06);
+    filter: sepia(0%) saturate(110%);
+  }
+
+  .photo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 8px;
+    pointer-events: none;
+    transition: border-color 0.3s;
+  }
+
+  .photo-card:hover::after {
+    border-color: rgba(201,169,110,0.6);
+  }
+
+  .message-section {
+    position: relative;
+    z-index: 1;
+    padding: 140px 20px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    scroll-margin-top: 80px;
+  }
+
+  .envelope-wrap {
+    position: relative;
+    width: min(720px, 92vw);
+    height: min(520px, 85vw);
+    margin: 0 auto;
+  }
+
+  .message-box {
+    background: rgba(18,7,10,0.65);
+    border: 1px solid rgba(201,169,110,0.24);
+    border-radius: 10px;
+    padding: clamp(30px, 6vw, 60px) clamp(24px, 5vw, 50px);
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 2.8s;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+    backdrop-filter: blur(10px);
+  }
+
+  .message-box::before,
+  .message-box::after {
+    content: "\2726";
+    color: var(--gold);
+    font-size: 0.7rem;
+    position: absolute;
+  }
+
+  .message-box::before { top: 14px; left: 14px; }
+  .message-box::after  { bottom: 14px; right: 14px; }
+
+  .message-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    line-height: 2;
+    color: var(--cream);
+    font-weight: 300;
+    font-style: italic;
+    text-align: left;
+    letter-spacing: 0.2px;
+  }
+
+  .iloveyou {
+    display: block;
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: var(--rose);
+    margin-top: 30px;
+    font-style: normal;
+    text-shadow: 0 0 30px rgba(192,97,106,0.5);
+  }
+
+  .letter-signature {
+    display: block;
+    margin-top: 18px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(253,244,245,0.7);
+    font-style: normal;
+  }
+
+  .envelope {
+    position: relative;
+    width: min(720px, 92vw);
+    height: min(280px, 45vw);
+    margin: 0 auto;
+    cursor: pointer;
+    perspective: 1200px;
+    transition: transform 0.35s ease;
+  }
+
+  .envelope:hover {
+    transform: translateY(-4px);
+  }
+
+  .envelope-shell {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(201,169,110,0.12));
+    border: 1px solid rgba(201,169,110,0.4);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  }
+
+  .envelope-pocket {
+    position: absolute;
+    inset: 12px;
+    background: linear-gradient(135deg, rgba(192,97,106,0.18), rgba(18,7,10,0.4));
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .envelope-flap {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    height: 58%;
+    background: linear-gradient(135deg, rgba(232,160,168,0.35), rgba(201,169,110,0.2));
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.9s ease;
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,0.15);
+  }
+
+  .envelope-seal {
+    position: absolute;
+    left: 50%;
+    bottom: 22%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background: radial-gradient(circle at 35% 35%, #f2d0d4, #c0616a);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .envelope-hint {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: rgba(253,244,245,0.7);
+    pointer-events: none;
+  }
+
+  .letter {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) translateY(0%);
+    width: min(760px, 95vw);
+    background: linear-gradient(160deg, rgba(24,10,13,0.92), rgba(12,6,8,0.95));
+    border: 1px solid rgba(201,169,110,0.28);
+    border-radius: 12px;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+    opacity: 0;
+    transition: transform 0.9s ease, opacity 0.6s ease;
+    pointer-events: none;
+    max-height: min(70vh, 520px);
+    overflow: auto;
+  }
+
+  .letter::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .letter::-webkit-scrollbar-thumb {
+    background: rgba(201,169,110,0.4);
+    border-radius: 999px;
+  }
+
+  .envelope.is-open .envelope-flap {
+    transform: rotateX(-160deg);
+  }
+
+  .envelope.is-open + .letter {
+    transform: translateX(-50%) translateY(30%);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .envelope.is-close .envelope-flap {
+    transform: rotateX(0deg);
+  }
+
+  .envelope.is-open .envelope-hint {
+    opacity: 0;
+  }
+
+  .letter .message-box {
+    opacity: 1;
+    animation: none;
+    border-radius: 12px;
+  }
+
+  .footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 20px 60px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 3.2s;
+  }
+
+  .footer-hearts {
+    font-size: 1.2rem;
+    letter-spacing: 8px;
+    color: var(--rose);
+    margin-bottom: 12px;
+  }
+
+  .footer-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: rgba(253,244,245,0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .loader {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(800px 600px at 50% 35%, rgba(192,97,106,0.18), transparent 60%),
+                linear-gradient(160deg, #14070a 0%, #1b0b10 35%, #12070a 100%);
+    display: grid;
+    place-items: center;
+    z-index: 9999;
+    transition: opacity 1.4s ease, visibility 1.4s ease;
+  }
+
+  .loader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .loader-heart {
+    width: 90px;
+    height: 90px;
+    position: relative;
+    transform: rotate(-45deg);
+    background: linear-gradient(140deg, #e8a0a8, #c0616a);
+    box-shadow: 0 0 30px rgba(192,97,106,0.6);
+    animation: heartbeat 1.2s ease-in-out infinite;
+  }
+
+  .loader-heart::before,
+  .loader-heart::after {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: inherit;
+    border-radius: 50%;
+  }
+
+  .loader-heart::before {
+    top: -45px;
+    left: 0;
+  }
+
+  .loader-heart::after {
+    left: 45px;
+    top: 0;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: rotate(-45deg) scale(1); }
+    20% { transform: rotate(-45deg) scale(1.08); }
+    40% { transform: rotate(-45deg) scale(0.98); }
+    60% { transform: rotate(-45deg) scale(1.12); }
+  }
+
+  @keyframes photoReveal {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .petals { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .photo-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+    .photo-card:nth-child(4) { grid-column: span 2; aspect-ratio: 4/3; }
+    .photo-card:nth-child(6) { grid-column: span 2; aspect-ratio: 4/3; }
+    .hero-inner { padding: 22px; }
+    .hero-sub { letter-spacing: 3px; }
+    .section-title { letter-spacing: 3px; }
+    .envelope-wrap { height: min(560px, 95vw); }
+    .letter { max-height: 65vh; }
+    .envelope-hint { font-size: 0.65rem; letter-spacing: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="loader" id="page-loader" aria-hidden="true">
+  <div>
+    <div class="loader-heart"></div>
+  </div>
+</div>
+
+<div class="petals">
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+  <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <p class="badge">for my one &amp; only</p>
+    <h1 class="hero-title">Happy 1st Monthsary</h1>
+    <p class="hero-sub">One month of love &nbsp;&middot;&nbsp; One lifetime to go</p>
+    <div class="heart-divider">&hearts; &nbsp; &hearts; &nbsp; &hearts;</div>
+    <div class="hero-meta">April 1, 2026 &nbsp;&middot;&nbsp; Our First Chapter</div>
+    <a class="cta" href="#letter">Open The Letter</a>
+    <div class="scroll-indicator">Scroll</div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <p class="section-title">Our Moments</p>
+  <div class="gallery-wrap">
+    <div class="photo-grid">
+      <div class="photo-card"><img src="images/2.jpg" alt="You"></div>
+      <div class="photo-card"><img src="images/1.jpg" alt="You"></div>
+      <div class="photo-card"><img src="images/3.jpg" alt="You"></div>
+      <div class="photo-card"><img src="images/4.jpg" alt="Us"></div>
+      <div class="photo-card"><img src="images/5.jpg" alt="You"></div>
+      <div class="photo-card"><img src="images/6.jpg" alt="You"></div>
+    </div>
+  </div>
+</section>
+
+<section class="message-section" id="letter">
+  <div class="envelope-wrap">
+  <div class="envelope is-close" id="love-envelope" role="button" aria-expanded="false" tabindex="0">
+      <div class="envelope-shell"></div>
+      <div class="envelope-pocket"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">&hearts;</div>
+      <div class="envelope-hint">Open with Love</div>
+    </div>
+    <div class="letter">
+      <div class="message-box">
+        <p class="message-text">My Love,<br><br>
+Happy 1st monthsary &#x1F495;<br><br>
+It&#39;s amazing how one month with you can feel so special, yet still feel like it&#39;s only the beginning of something even more beautiful. In just a short time, you&#39;ve already become such an important part of my life&#8212;someone who makes my days brighter, my problems lighter, and my heart fuller.<br><br>
+I never expected that I would find someone like you&#8212;someone who understands me, supports me, and makes me smile even in the simplest ways. Every moment we share, whether it&#39;s laughter, deep talks, or even quiet times together, means more to me than words can fully express.<br><br>
+This first month is just a small chapter of our story, but it&#39;s already filled with memories I&#39;ll always treasure. And if this is how wonderful one month feels, I can&#39;t wait to see what the future holds for us.<br><br>
+Thank you for being you&#8212;for your love, your patience, and your presence in my life. I promise to continue choosing you, caring for you, and growing with you every single day.<br><br>
+Happy 1st monthsary, my love. Here&#39;s to many more months and years together &#x1F496;<br><br>
+<span class="letter-signature">Forever yours,<br>Love</span>
+<span class="iloveyou">I love you</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-hearts">&hearts; &hearts; &hearts;</div>
+  <p class="footer-date">April 1, 2026 &nbsp;&middot;&nbsp; Forever &amp; always</p>
+</footer>
+
+<script>
+  (function () {
+    var loader = document.getElementById('page-loader');
+    if (!loader) return;
+    var hideLoader = function () {
+      setTimeout(function () {
+        loader.classList.add('is-hidden');
+      }, 800);
+    };
+    window.addEventListener('load', hideLoader);
+    document.addEventListener('DOMContentLoaded', hideLoader);
+    setTimeout(hideLoader, 2500);
+  })();
+</script>
+<script>
+  (function () {
+    var envelope = document.getElementById('love-envelope');
+    if (!envelope) return;
+    var letter = envelope.nextElementSibling;
+    var setOpen = function (open) {
+      envelope.classList.toggle('is-open', open);
+      envelope.classList.toggle('is-close', !open);
+      envelope.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    var toggle = function () {
+      var isOpen = envelope.classList.contains('is-open');
+      setOpen(!isOpen);
+    };
+    envelope.addEventListener('click', function (event) {
+      event.stopPropagation();
+      toggle();
+    });
+    if (letter) {
+      letter.addEventListener('click', function (event) {
+        event.stopPropagation();
+      });
+    }
+    document.addEventListener('click', function () {
+      if (envelope.classList.contains('is-open')) {
+        setOpen(false);
+      }
+    });
+    envelope.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggle();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
