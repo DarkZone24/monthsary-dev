@@ -588,6 +588,44 @@
     visibility: hidden;
   }
 
+  .music-control {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(201,169,110,0.5);
+    background: linear-gradient(140deg, rgba(232,160,168,0.22), rgba(201,169,110,0.18));
+    color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    cursor: pointer;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .music-control.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+
+  .music-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 10px rgba(201,169,110,0.8);
+  }
+
   .loader-heart {
     width: 90px;
     height: 90px;
@@ -664,6 +702,15 @@
     <div class="loader-heart"></div>
   </div>
 </div>
+
+<audio id="bg-audio" preload="auto" loop>
+  <source src="sounds/Dan%20%20Shay%20-%20Glad%20You%20Exist%20(Acoustic).mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control is-hidden" id="music-control" type="button" aria-pressed="false">
+  <span class="music-dot" aria-hidden="true"></span>
+  <span id="music-label">Tap to play music</span>
+</button>
 
 <div class="petals">
   <div class="petal"></div><div class="petal"></div><div class="petal"></div>
@@ -765,6 +812,84 @@ Happy 1st monthsary, my love. Here&#39;s to many more months and years together 
     window.addEventListener('load', hideLoader);
     document.addEventListener('DOMContentLoaded', hideLoader);
     setTimeout(hideLoader, 2500);
+  })();
+</script>
+<script>
+  (function () {
+    var audio = document.getElementById('bg-audio');
+    var control = document.getElementById('music-control');
+    var label = document.getElementById('music-label');
+    if (!audio || !control || !label) return;
+
+    var isReady = false;
+    var hasUserGesture = false;
+    var fadeInterval = null;
+
+    var setLabel = function (playing) {
+      control.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      label.textContent = playing ? 'Pause music' : 'Tap to play music';
+    };
+
+    var fadeIn = function () {
+      clearInterval(fadeInterval);
+      audio.volume = 0.2;
+      fadeInterval = setInterval(function () {
+        if (audio.volume >= 0.5) {
+          audio.volume = 0.5;
+          clearInterval(fadeInterval);
+          return;
+        }
+        audio.volume = Math.min(0.5, audio.volume + 0.06);
+      }, 160);
+    };
+
+    var startAudio = function () {
+      audio.play().then(function () {
+        fadeIn();
+        setLabel(true);
+      }).catch(function () {
+        setLabel(false);
+      });
+    };
+
+    var toggleAudio = function () {
+      if (audio.paused) {
+        startAudio();
+      } else {
+        audio.pause();
+        setLabel(false);
+      }
+    };
+
+    var revealControl = function () {
+      if (isReady) return;
+      isReady = true;
+      control.classList.remove('is-hidden');
+      startAudio();
+    };
+
+    document.addEventListener('click', function () {
+      if (hasUserGesture) return;
+      hasUserGesture = true;
+      startAudio();
+    }, { once: true });
+
+    control.addEventListener('click', function (event) {
+      event.stopPropagation();
+      toggleAudio();
+    });
+
+    var loader = document.getElementById('page-loader');
+    if (loader) {
+      var observer = new MutationObserver(function () {
+        if (loader.classList.contains('is-hidden')) {
+          revealControl();
+        }
+      });
+      observer.observe(loader, { attributes: true, attributeFilter: ['class'] });
+    } else {
+      revealControl();
+    }
   })();
 </script>
 <script>
